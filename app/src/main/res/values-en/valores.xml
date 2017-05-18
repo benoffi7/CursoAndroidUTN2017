@@ -1,0 +1,4 @@
+<resources>
+    <color name="fondo">#0000CC</color>
+    <dimen name="margen">15sp</dimen>
+</resources>
