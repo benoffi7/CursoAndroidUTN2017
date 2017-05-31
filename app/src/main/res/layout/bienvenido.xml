@@ -5,8 +5,14 @@
               android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textView_nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"/>
+
+    <Button
+        android:id="@+id/button_salir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salir"/>
 </LinearLayout>

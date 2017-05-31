@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ac_terminos_condiciones"
+            android:name=".lay_login_preferencias"
             android:label="@string/title_activity_main2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ac_clasificacion"></activity>
+        <activity android:name=".lay_bienvenido_preferencias"></activity>
     </application>
 
 </manifest>
