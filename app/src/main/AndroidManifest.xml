@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".lay_login_preferencias"
+            android:name=".lay_listado"
             android:label="@string/title_activity_main2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
