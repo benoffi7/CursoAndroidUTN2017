@@ -21,11 +21,12 @@ import java.util.ArrayList;
 public class lay_listado extends AppCompatActivity
 {
     String elementos_dinamicos[];
+    String nombre;
     ArrayList<Casa> casas;
     RecyclerView contenedor_listado;
     Spinner spinner;
     Button button_ver;
-
+    String elementos_dinamicos_recursos[];
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,7 @@ public class lay_listado extends AppCompatActivity
             public void onClick(View view)
             {
                 int pos = spinner.getSelectedItemPosition();
-                Toast.makeText(lay_listado.this, "Se ha seleccionado la opcion: "+elementos_dinamicos[pos], Toast.LENGTH_SHORT).show();
+                Toast.makeText(lay_listado.this, "Se ha seleccionado la opcion: "+elementos_dinamicos_recursos[pos], Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -56,7 +57,17 @@ public class lay_listado extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l)
             {
-                Toast.makeText(lay_listado.this, "Se ha seleccionado la opcion: "+elementos_dinamicos[pos], Toast.LENGTH_SHORT).show();
+                //Toast.makeText(lay_listado.this, "Opcion: "+elementos_dinamicos_recursos[pos], Toast.LENGTH_SHORT).show();
+                if (pos == 0)
+                {
+                    crearCasas();
+                    setearAdaptadorLista();
+                }
+                else if (pos == 1)
+                {
+                    crearDepartamentos();
+                    setearAdaptadorLista();
+                }
             }
 
             @Override
@@ -73,10 +84,10 @@ public class lay_listado extends AppCompatActivity
         elementos_dinamicos[0] = "Elemento 1";
         elementos_dinamicos[1] = "Elemento 2";
 
-        //String elementos_dinamicos_recursos[] = getResources().getStringArray(R.array.valores_array);
+        elementos_dinamicos_recursos = getResources().getStringArray(R.array.valores_array);
 
         ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, elementos_dinamicos);
+                android.R.layout.simple_spinner_item, elementos_dinamicos_recursos);
 
 
         adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -113,6 +124,29 @@ public class lay_listado extends AppCompatActivity
         otraCasa.setCalle("independencia");
         otraCasa.setNumero(456);
         otraCasa.setHabitaciones(9);
+        otraCasa.setOcupada(false);
+        otraCasa.setOwner("");
+        //agrego las casas al listado
+        casas.add(casa);
+        casas.add(otraCasa);
+    }
+
+    void crearDepartamentos()
+    {
+        //listado de casas
+        casas = new ArrayList<>();
+        //una casa
+        Casa casa = new Casa();
+        casa.setCalle("jujuy");
+        casa.setNumero(546);
+        casa.setHabitaciones(3);
+        casa.setOcupada(true);
+        casa.setOwner("yo");
+        //otra casa
+        Casa otraCasa = new Casa();
+        otraCasa.setCalle("san martin");
+        otraCasa.setNumero(2500);
+        otraCasa.setHabitaciones(1);
         otraCasa.setOcupada(false);
         otraCasa.setOwner("");
         //agrego las casas al listado
