@@ -5,14 +5,19 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.activeandroid.query.Select;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Gonzalo on 07/06/2017.
@@ -22,7 +27,6 @@ public class lay_listado extends AppCompatActivity
 {
     String elementos_dinamicos[];
     String nombre;
-    ArrayList<Casa> casas;
     RecyclerView contenedor_listado;
     Spinner spinner;
     Button button_ver;
@@ -45,8 +49,14 @@ public class lay_listado extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                int pos = spinner.getSelectedItemPosition();
-                Toast.makeText(lay_listado.this, "Se ha seleccionado la opcion: "+elementos_dinamicos_recursos[pos], Toast.LENGTH_SHORT).show();
+                //int pos = spinner.getSelectedItemPosition();
+                long id = 2;
+                Casa casaPrueba = new Select().from(Casa.class).where("Id = ",id).executeSingle();
+                if (casaPrueba!=null)
+                {
+                    Toast.makeText(lay_listado.this, "Se ha seleccionado el id: "+casaPrueba.getId(), Toast.LENGTH_SHORT).show();
+                }
+                //Toast.makeText(lay_listado.this, "Se ha seleccionado la opcion: "+elementos_dinamicos_recursos[pos], Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -63,11 +73,7 @@ public class lay_listado extends AppCompatActivity
                     crearCasas();
                     setearAdaptadorLista();
                 }
-                else if (pos == 1)
-                {
-                    crearDepartamentos();
-                    setearAdaptadorLista();
-                }
+
             }
 
             @Override
@@ -96,6 +102,7 @@ public class lay_listado extends AppCompatActivity
 
     private void setearAdaptadorLista()
     {
+        List<Casa> casas = new Select().from(Casa.class).execute();
         AdaptadorCasas adaptadorCasas = new AdaptadorCasas(casas);
         contenedor_listado.setAdapter(adaptadorCasas);
     }
@@ -110,47 +117,33 @@ public class lay_listado extends AppCompatActivity
 
     void crearCasas()
     {
-        //listado de casas
-        casas = new ArrayList<>();
-        //una casa
-        Casa casa = new Casa();
-        casa.setCalle("salta");
-        casa.setNumero(123);
-        casa.setHabitaciones(3);
-        casa.setOcupada(true);
-        casa.setOwner("pepe grillo");
-        //otra casa
-        Casa otraCasa = new Casa();
-        otraCasa.setCalle("independencia");
-        otraCasa.setNumero(456);
-        otraCasa.setHabitaciones(9);
-        otraCasa.setOcupada(false);
-        otraCasa.setOwner("");
-        //agrego las casas al listado
-        casas.add(casa);
-        casas.add(otraCasa);
+        List<Casa> casas = new Select().from(Casa.class).execute();
+        if (casas.size() == 0) {
+            //listado de casas
+
+            //una casa
+            Casa casa = new Casa();
+            casa.setCalle("salta");
+            casa.setNumero(123);
+            casa.setHabitaciones(3);
+            casa.setOcupada(true);
+            casa.setOwner("pepe grillo");
+            casa.setBanios("1");
+            long id = casa.save();
+            Log.d("tp", "id: " + id);
+            //otra casa
+            Casa otraCasa = new Casa();
+            otraCasa.setCalle("independencia");
+            casa.setBanios("3");
+            otraCasa.setNumero(456);
+            otraCasa.setHabitaciones(9);
+            otraCasa.setOcupada(false);
+            otraCasa.setOwner("");
+            id = otraCasa.save();
+            Log.d("tp", "id: " + id);
+            //agrego las casas al listado
+        }
     }
 
-    void crearDepartamentos()
-    {
-        //listado de casas
-        casas = new ArrayList<>();
-        //una casa
-        Casa casa = new Casa();
-        casa.setCalle("jujuy");
-        casa.setNumero(546);
-        casa.setHabitaciones(3);
-        casa.setOcupada(true);
-        casa.setOwner("yo");
-        //otra casa
-        Casa otraCasa = new Casa();
-        otraCasa.setCalle("san martin");
-        otraCasa.setNumero(2500);
-        otraCasa.setHabitaciones(1);
-        otraCasa.setOcupada(false);
-        otraCasa.setOwner("");
-        //agrego las casas al listado
-        casas.add(casa);
-        casas.add(otraCasa);
-    }
+
 }

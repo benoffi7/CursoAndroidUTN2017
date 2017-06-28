@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Gonzalo on 07/06/2017.
@@ -15,9 +16,9 @@ import java.util.ArrayList;
 public class AdaptadorCasas extends RecyclerView.Adapter<CasaViewHolder>
 {
     private static final String TAG = "AdaptadorCasas";
-    ArrayList<Casa>misCasas;
+    List<Casa> misCasas;
 
-    public AdaptadorCasas(ArrayList<Casa>arrayList)
+    public AdaptadorCasas(List<Casa>arrayList)
     {
         misCasas = arrayList;
     }

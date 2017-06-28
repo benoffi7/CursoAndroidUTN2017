@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".app"
         android:theme="@style/AppTheme">
         <activity
             android:name=".lay_listado"
@@ -20,6 +21,10 @@
         </activity>
 
         <activity android:name=".lay_bienvenido_preferencias"></activity>
+
+        <meta-data android:name="AA_DB_NAME" android:value="MiBaseDeDatos3.db" />
+        <meta-data android:name="AA_DB_VERSION" android:value="3" />
+
     </application>
 
 </manifest>
